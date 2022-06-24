@@ -15,7 +15,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSHKEY }}
-          password: ${{ secrets.PASSWORD }}
+          # password: ${{ secrets.PASSWORD }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script_stop: true
           script: |
