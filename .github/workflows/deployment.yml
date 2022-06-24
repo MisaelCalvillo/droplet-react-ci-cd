@@ -1,0 +1,33 @@
+name: deployment
+on: 
+  push: 
+    branches: 
+      - 'main'
+
+jobs: 
+  deployment: 
+    name: deployment
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Conectar a Digital Ocean y Bajar el Repo 🚀
+        uses: appleboy/ssh-action@v0.1.4
+        with: 
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSHKEY }}
+          password: ${{ secrets.PASSWORD }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          script_stop: true
+          script: |
+            echo "Nos conectamos al Droplet de la app de React"
+            id
+            cd ~/app/droplet-react-ci-cd
+            ls -al 
+            ./download_git.sh
+      - run: npm install
+      - run: npm run test
+      - run: npm run build
+      - run: echo "Exito TOTAL ✅"
+
+
+
